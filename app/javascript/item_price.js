@@ -1,23 +1,20 @@
-const itemPrice = () => {
-  const priceInput = document.getElementById("item-price");
-
-  if (!priceInput) {
-    return;
-  }
+const price = () => {
+  const priceInput = document.getElementById("item-price")
+  if (!priceInput) return
 
   priceInput.addEventListener("input", () => {
-    const inputValue = Number(priceInput.value);
+    const inputValue = priceInput.value
+    const addTaxPrice = document.getElementById("add-tax-price")
+    const profit = document.getElementById("profit")
 
-    const addTaxDom = document.getElementById("add-tax-price");
-    const profitDom = document.getElementById("profit");
+    if (!addTaxPrice || !profit) return
 
-    const tax = Math.floor(inputValue * 0.1);
-    const profit = Math.floor(inputValue - tax);
+    const tax = Math.floor(inputValue * 0.1)
+    const salesProfit = Math.floor(inputValue - tax)
 
-    addTaxDom.innerHTML = tax;
-    profitDom.innerHTML = profit;
-  });
-};
+    addTaxPrice.innerHTML = tax
+    profit.innerHTML = salesProfit
+  })
+}
 
-window.addEventListener("turbo:load", itemPrice);
-window.addEventListener("turbo:render", itemPrice);
+window.addEventListener("turbo:load", price)
